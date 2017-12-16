@@ -1,3 +1,4 @@
 .game-field {
     display: grid;
+    padding: 2%;
 }

@@ -2,4 +2,10 @@
     flex-grow: 1;
     background: beige;
     margin: 2px;
+    border: 1px solid green;
+    transition: transform 0.2s ease;
+}
+
+.box:hover {
+    transform: scale(1.05, 1.05);
 }
