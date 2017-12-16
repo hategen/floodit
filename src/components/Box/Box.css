@@ -1,0 +1,5 @@
+.box {
+    flex-grow: 1;
+    background: beige;
+    margin: 2px;
+}

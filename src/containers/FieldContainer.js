@@ -1,8 +1,10 @@
 import {connect} from 'react-redux';
 
+import GameField from '../components/GameField/GameField';
 
-import FieldComponent from '../components/Field/Field';
+const mapStateToProps = (state) => state;
+const mapDispatchToprops = dispatch => dispatch => ({});
 
-const ConnectedField = connect()(FieldComponent);
+const ConnectedField = connect(mapStateToProps, mapDispatchToprops)(GameField);
 
 export default ConnectedField;
