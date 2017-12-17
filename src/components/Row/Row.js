@@ -5,11 +5,12 @@ import './Row.css';
 const Row = ({boxes}) => {
     return (
         <div className="row">
-            {boxes.map((box, idx) => {
+            {boxes.map((color, idx) => {
                 return (
 
                     <Box
                         key={idx}
+                        color={color}
                     >
                         box
                     </Box>

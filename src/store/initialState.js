@@ -1,9 +1,10 @@
 const initialState = {
     fieldSize: 10,
-    numberOfColors: 6,
+    colorNumber: 6,
     field: [],
     isStarted: false,
-    movesMade: 0
+    movesMade: 0,
+    colors: []
 };
 
 export default initialState;

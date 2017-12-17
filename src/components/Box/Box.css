@@ -1,8 +1,8 @@
 .box {
     flex-grow: 1;
     background: rgb(169, 192, 255);
-    margin: 2px;
-    border: 2px solid rgba(0, 87, 115, 0.97);
+    margin: 0px;
+    border: 1px solid rgba(0, 87, 115, 0.97);
     transition: transform 0.2s ease;
 }
 
