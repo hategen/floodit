@@ -2,7 +2,7 @@
     text-align: center;
     display: grid;
     height: 100vh;
-    grid-template-rows: 75px auto 75px;
+    grid-template-rows: 50px 25px auto 75px;
 }
 
 .App-logo {

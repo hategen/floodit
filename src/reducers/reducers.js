@@ -1,11 +1,12 @@
-import {ACTION} from "../actions/actions";
+import {ACTION_NEW_GAME} from "../actions/actions";
 
 export default function reducers(state = {}, action) {
     switch (action.type) {
-        case ACTION:
+        case ACTION_NEW_GAME:
             return {
                 ...state,
-                text: action.text
+                fieldSize: action.fieldSize,
+                field: Array(action.fieldSize,).fill(Array(action.fieldSize).fill(1))
             }
         default:
             return state

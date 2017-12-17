@@ -1,11 +1,11 @@
 .box {
     flex-grow: 1;
-    background: beige;
+    background: rgb(169, 192, 255);
     margin: 2px;
-    border: 1px solid green;
+    border: 2px solid rgba(0, 87, 115, 0.97);
     transition: transform 0.2s ease;
 }
 
 .box:hover {
-    transform: scale(1.05, 1.05);
+    transform: scale(1.1, 1.1);
 }

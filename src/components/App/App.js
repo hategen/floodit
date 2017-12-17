@@ -6,6 +6,7 @@ import AppHeader from '../Header/Header';
 import AppFooter from '../Footer/Footer';
 
 import FieldContainer from '../../containers/FieldContainer';
+import GameSettingsContainer from '../../containers/GameSettingsContainer';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         return (
             <div className="App">
                 <AppHeader/>
+                <GameSettingsContainer/>
                 <FieldContainer/>
                 <AppFooter/>
             </div>

@@ -1,6 +1,6 @@
 
 .row {
-    background: aqua;
+    background: #fffbf9;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
