@@ -4,8 +4,6 @@ import './GameSettings.css';
 import NumericInput from '../NumericInput/NumericInput';
 
 const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNumberChange}) => {
-
-
     const onFieldSizeChangeHandler = (event) => {
         fieldSizeChange(Number.parseInt(event.target.value, 10))
     };

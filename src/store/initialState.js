@@ -4,7 +4,9 @@ const initialState = {
     field: [],
     isStarted: false,
     movesMade: 0,
-    colors: []
+    colors: [],
+    currentColor: null,
+    frontier: [{x: 0, y: 0}]
 };
 
 export default initialState;
