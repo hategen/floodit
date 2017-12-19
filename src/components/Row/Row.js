@@ -5,12 +5,13 @@ import './Row.css';
 const Row = ({boxes, boxClickHandler, y, frontier}) => {
     return (
         <div className="row">
-            {boxes.map((color, idx) => {
+            {boxes.map((box, idx) => {
                 return (
 
                     <Box
                         key={idx}
-                        color={color}
+                        color={box.color}
+                        visited={box.visited}
                         onClick={boxClickHandler}
                         x={idx}
                         y={y}

@@ -2,7 +2,30 @@
     text-align: center;
     display: grid;
     height: 100vh;
-    grid-template-rows: 50px 25px auto 75px;
+    grid-template-areas:
+   "field field header"
+   "field field settings"
+   "field field settings"
+   "field field settings"
+   "field field footer";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    grid-template-rows: 2fr 1fr 1fr 1fr 2fr;
+}
+
+.game-settings {
+    grid-area: settings;
+}
+
+.game-field {
+    grid-area: field;
+}
+header{
+    grid-area: header;
+}
+
+footer{
+    grid-area: footer;
 }
 
 .App-logo {

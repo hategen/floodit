@@ -1,5 +1,5 @@
 .game-field {
     display: grid;
-    padding: 2%;
-    width: calc(100vh - 150px);
+    padding: 1%;
+    width: 100vh;
 }

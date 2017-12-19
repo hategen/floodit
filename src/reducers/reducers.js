@@ -5,13 +5,13 @@ import {
     ACTION_CHANGE_COLOR
 } from "../actions/actions";
 
-import {getRandomColors, getRandomColorsMatrix, floodField} from '../utils/colors';
+import {getRandomColors, getRandomField, floodField} from '../utils/colors';
 
 export default function reducers(state = {}, action) {
     switch (action.type) {
         case ACTION_NEW_GAME:
             const colors = getRandomColors(state.colorNumber);
-            const field = getRandomColorsMatrix(colors, state.fieldSize);
+            const field = getRandomField(colors, state.fieldSize);
             const currentColor = field[0][0];
             return {
                 ...state,
