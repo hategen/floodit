@@ -73,28 +73,43 @@ const mapFrontierToArray = (frontier) => {
     return newFrontier.length ? newFrontier : [{x: 0, y: 0}];
 };
 
-const filterStartFrontier = (frontier, field) => {
 
-};
-
-export const floodField = (field, color, startFrontier) => {
+export const floodField = (field, color, startFrontier, visited) => {
     console.time('FLOOD');
     const floodColor = field[0][0];
-    const visited = {};
+    //  const visited = {};
     if (color === floodColor) {
-        return {field, frontier: startFrontier};
+        return {field, frontier: startFrontier, visited};
     }
     const nextFrontier = {};
+    const fieldSize = field.length - 1;
     while (startFrontier.length !== 0) {
         const current = startFrontier.pop();
         const neighbours = getNeighbours(field, current.x, current.y, floodColor);
         const notVisited = filterVisited(visited, neighbours);
 
-        if (neighbours.length < 4 && current.x >= 1 && current.x !== 0 && current.x !== field.length - 1 && current.y >= 1 && current.y !== 0 && current.y !== field.length - 1) {
+        if (
+            neighbours.length < 2 &&
+            (
+                (current.x === 0 && current.y === 0) ||
+                (current.x === 0 && current.y === fieldSize) ||
+                (current.x === fieldSize && current.y === 0) ||
+                (current.x === fieldSize && current.y === fieldSize)
+            )) {
             nextFrontier[`${current.x}_${current.y}`] = true;
-        } else if (neighbours.length < 3 && (current.x === 0 || current.x === field.length - 1)) {
+        }
+        else if (
+            neighbours.length < 3 &&
+            (
+                (current.x === 0 && current.y > 0 && current.y < fieldSize) ||
+                (current.x === fieldSize && current.y > 0 && current.y < fieldSize) ||
+                (current.y === 0 && current.x > 0 && current.x < fieldSize) ||
+                (current.y === fieldSize && current.x > 0 && current.x < fieldSize)
+            )
+        ) {
             nextFrontier[`${current.x}_${current.y}`] = true;
-        } else if (neighbours.length < 3 && (current.y === 0 || current.y === field.length - 1)) {
+        }
+        else if (neighbours.length < 4 && current.x >= 1 && current.x !== 0 && current.x !== fieldSize && current.y >= 1 && current.y !== 0 && current.y !== fieldSize) {
             nextFrontier[`${current.x}_${current.y}`] = true;
         }
 
@@ -104,7 +119,7 @@ export const floodField = (field, color, startFrontier) => {
     }
 
     console.timeEnd('FLOOD');
-    const ret = {field: repaintField(field, visited, color), frontier: mapFrontierToArray(nextFrontier)}
+    const ret = {field: repaintField(field, visited, color), frontier: mapFrontierToArray(nextFrontier), visited};
 
     return ret;
 };

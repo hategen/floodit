@@ -18,7 +18,8 @@ export default function reducers(state = {}, action) {
                 colors: colors,
                 field: field,
                 currentColor: currentColor,
-                frontier: [{x: 0, y: 0}]
+                frontier: [{x: 0, y: 0}],
+                visited: {}
             };
 
         case ACTION_FIELDSIZE_CHANGE:
@@ -32,11 +33,12 @@ export default function reducers(state = {}, action) {
                 colorNumber: action.colorNumber,
             };
         case ACTION_CHANGE_COLOR:
-            const {frontier, field: newField} = floodField(state.field, action.color, state.frontier);
+            const {frontier, field: newField, visited} = floodField(state.field, action.color, state.frontier, state.visited);
             return {
                 ...state,
                 field: newField,
-                frontier
+                frontier,
+                visited
             };
 
         default:

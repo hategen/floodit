@@ -3,7 +3,7 @@ import React from 'react';
 import Row from '../Row/Row';
 import './GameField.css';
 
-const GameField = ({field, changeColor}) => {
+const GameField = ({field, changeColor, frontier}) => {
 
     return (
         <section className="game-field">
@@ -13,7 +13,9 @@ const GameField = ({field, changeColor}) => {
                         <Row
                             key={idx}
                             boxes={row}
+                            y={idx}
                             boxClickHandler={changeColor}
+                            frontier={frontier}
                         />
                     )
                 })

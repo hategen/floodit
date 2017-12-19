@@ -6,7 +6,8 @@ const initialState = {
     movesMade: 0,
     colors: [],
     currentColor: null,
-    frontier: [{x: 0, y: 0}]
+    frontier: [{x: 0, y: 0}],
+    visited: {}
 };
 
 export default initialState;
