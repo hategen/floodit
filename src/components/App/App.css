@@ -3,28 +3,29 @@
     display: grid;
     height: 100vh;
     width: 100vw;
-    grid-template-areas:
-   "field  header"
-   "field  settings"
-   "field  footer";
-    grid-template-columns: 9fr minmax(300px,3fr);
+    grid-template-areas: "field  header" "field  settings" "field  footer";
+    grid-template-columns: 9fr minmax(300px, 2fr);
     grid-template-rows: 1fr 3fr 1fr;
-  }
-
-.game-settings {
-    grid-area: settings;
 }
 
 .game-field {
     grid-area: field;
     justify-self: center;
 }
-header{
-    grid-area: header;
+
+.game-settings {
+    grid-area: settings;
+    justify-self: center;
 }
 
-footer{
+header {
+    grid-area: header;
+    justify-self: center;
+}
+
+footer {
     grid-area: footer;
+    justify-self: center;
 }
 
 .App-logo {

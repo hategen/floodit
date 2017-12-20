@@ -1,7 +1,7 @@
 .box {
     flex-grow: 1;
     /*background: rgb(169, 192, 255);*/
-    margin: 1px;
+    /*margin: 1px;*/
     position: relative;
     /*//  transition: transform 0.2s ease, background-color 0.2s ease-in-out;*/
 }
@@ -24,6 +24,7 @@
     height: 3px;
     content: '';
 }
+
 
 .box.visited {
 

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {newGame, fieldSizeChange, colorNumberChange} from '../actions/actions';
+import {newGame, fieldSizeChange, colorNumberChange, autoTurn} from '../actions/actions';
 import GameSettings from '../components/GameSettings/GameSettings';
 
 const mapStateToProps = (state) => state;
@@ -12,6 +12,9 @@ const mapDispatchToprops = dispatch => ({
     },
     colorNumberChange: (colorNumber) => {
         dispatch(colorNumberChange(colorNumber))
+    },
+    autoTurn: () => {
+        dispatch(autoTurn())
     }
 
 });

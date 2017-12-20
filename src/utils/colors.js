@@ -53,6 +53,30 @@ const getNeighbours = (field, x, y, color) => {
     return neighbours;
 };
 
+const getNonMatchingNeighbours = (field, x, y, color) => {
+    const fieldLength = field[0].length - 1;
+    const fieldHeigth = field.length - 1;
+    const neighbours = [];
+
+    if (x - 1 >= 0 && field[y][x - 1].color !== color) {
+        neighbours.push({x: x - 1, y, color: field[y][x - 1].color});
+    }
+
+    if (x + 1 <= fieldLength && field[y][x + 1].color !== color) {
+        neighbours.push({x: x + 1, y, color: field[y][x + 1].color});
+    }
+
+    if (y - 1 >= 0 && field[y - 1][x].color !== color) {
+        neighbours.push({x: x, y: y - 1, color: field[y - 1][x].color});
+    }
+
+    if (y + 1 <= fieldHeigth && field[y + 1][x].color !== color) {
+        neighbours.push({x, y: y + 1, color: field[y + 1][x].color});
+    }
+
+    return neighbours;
+};
+
 const filterVisited = (visited = {}, points = []) => {
     return points.filter(el => {
         return !visited[`${el.x}_${el.y}`];
@@ -72,6 +96,7 @@ const repaintField = (field, points, color) => {
     console.timeEnd('REPAINT');
     return newField;
 };
+
 const mapFrontierToArray = (frontier) => {
     console.time('MAP');
     const newFrontier = [];
@@ -85,10 +110,84 @@ const mapFrontierToArray = (frontier) => {
     return newFrontier.length ? newFrontier : [{x: 0, y: 0}];
 };
 
+const getMaxNeighbours = (point, fieldSize) => {
+    if (
+        (point.x === 0 && point.y === 0) ||
+        (point.x === 0 && point.y === fieldSize) ||
+        (point.x === fieldSize && point.y === 0) ||
+        (point.x === fieldSize && point.y === fieldSize)
+    ) {
+        return 2;
+    }
+    else if (
+        (point.x === 0 && point.y > 0 && point.y < fieldSize) ||
+        (point.x === fieldSize && point.y > 0 && point.y < fieldSize) ||
+        (point.y === 0 && point.x > 0 && point.x < fieldSize) ||
+        (point.y === fieldSize && point.x > 0 && point.x < fieldSize)
+
+    ) {
+        return 3;
+    }
+    else if (
+        point.x >= 1 && point.x !== 0 &&
+        point.x !== fieldSize && point.y >= 1 &&
+        point.y !== 0 &&
+        point.y !== fieldSize) {
+
+        return 4
+    }
+};
+
+
+const clearFrontier = (frontier, field, color) => {
+    Object.keys(frontier).forEach(point => {
+        const [x, y] = point.split('_');
+        const neighbours = getNeighbours(field, Number.parseInt(x, 10), Number.parseInt(y, 10), color);
+
+        if (neighbours.length === getMaxNeighbours({x, y}, field.length)) {
+            delete frontier[point];
+        }
+    });
+    return frontier;
+};
+
+export const getNextTurnColor = (frontier, field) => {
+    const hash = {};
+
+    frontier.forEach(point => {
+        const {x, y} = point;
+        const color = field[y][x].color;
+        const visited = {};
+        const neighbours = getNonMatchingNeighbours(field, Number.parseInt(x, 10), Number.parseInt(y, 10), color);
+
+        neighbours.forEach(el => {
+            if (!visited[`${el.x}_${el.y}`]) {
+                hash[el.color] ? (hash[el.color]++) : (hash[el.color] = 1);
+                visited[`${el.x}_${el.y}`] = true;
+            }
+        });
+
+    });
+
+
+    let maxcolorName = Object.keys(hash)[0];
+    let maxColorNum = hash[maxcolorName];
+
+    for (const col in hash) {
+
+        if (hash[col] > maxColorNum) {
+            maxColorNum = hash[col];
+            maxcolorName = col;
+        }
+    }
+
+    return maxcolorName;
+};
+
 
 export const floodField = (field, color, startFrontier, visited) => {
         console.time('FLOOD');
-        const floodColor = field[0][0].color;
+        let floodColor = field[0][0].color;
         //  const visited = {};
         if (color === floodColor) {
             return {field, frontier: startFrontier, visited};
@@ -100,40 +199,32 @@ export const floodField = (field, color, startFrontier, visited) => {
             const neighbours = getNeighbours(field, current.x, current.y, floodColor);
             const notVisited = filterVisited(visited, neighbours);
 
-            if (
-                neighbours.length < 2 &&
-                (
-                    (current.x === 0 && current.y === 0) ||
-                    (current.x === 0 && current.y === fieldSize) ||
-                    (current.x === fieldSize && current.y === 0) ||
-                    (current.x === fieldSize && current.y === fieldSize)
-                )) {
+            if ((neighbours.length < 2 && getMaxNeighbours(current, fieldSize) === 2) ||
+                (neighbours.length < 3 && getMaxNeighbours(current, fieldSize) === 3) ||
+                (neighbours.length < 4 && getMaxNeighbours(current, fieldSize) === 4)) {
                 nextFrontier[`${current.x}_${current.y}`] = true;
             }
-            else if (
-                neighbours.length < 3 &&
-                (
-                    (current.x === 0 && current.y > 0 && current.y < fieldSize) ||
-                    (current.x === fieldSize && current.y > 0 && current.y < fieldSize) ||
-                    (current.y === 0 && current.x > 0 && current.x < fieldSize) ||
-                    (current.y === fieldSize && current.x > 0 && current.x < fieldSize)
-                )
-            ) {
-                nextFrontier[`${current.x}_${current.y}`] = true;
-            }
-            else if (neighbours.length < 4 && current.x >= 1 && current.x !== 0 && current.x !== fieldSize && current.y >= 1 && current.y !== 0 && current.y !== fieldSize) {
-                nextFrontier[`${current.x}_${current.y}`] = true;
-            }
-
 
             visited[`${current.x}_${current.y}`] = true;
             field[current.y][current.x].visited = true;
 
             startFrontier.push(...notVisited);
+
+            if (startFrontier.length === 0 && mapFrontierToArray(nextFrontier).length && floodColor !== color) {
+                floodColor = color;
+                startFrontier.push(...mapFrontierToArray(nextFrontier));
+            }
         }
 
         console.timeEnd('FLOOD');
-        const ret = {field: repaintField(field, visited, color), frontier: mapFrontierToArray(nextFrontier), visited};
+
+        const newField = repaintField(field, visited, color);
+
+        const ret = {
+            field: newField,
+            frontier: mapFrontierToArray(clearFrontier(nextFrontier, newField, color)),
+            visited
+        };
 
         return ret;
     }
