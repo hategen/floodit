@@ -9,11 +9,12 @@ import FieldContainer from '../../containers/FieldContainer';
 import GameSettingsContainer from '../../containers/GameSettingsContainer';
 
 class App extends Component {
-
     render() {
-        console.log(this.props);
         return (
-            <div className="App">
+            <div
+                className="App"
+                style={{backgroundColor: this.props.backgroundColor}}
+            >
                 <AppHeader/>
                 <GameSettingsContainer/>
                 <FieldContainer/>

@@ -166,9 +166,7 @@ export const getNextTurnColor = (frontier, field) => {
                 visited[`${el.x}_${el.y}`] = true;
             }
         });
-
     });
-
 
     let maxcolorName = Object.keys(hash)[0];
     let maxColorNum = hash[maxcolorName];

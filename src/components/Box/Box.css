@@ -1,15 +1,16 @@
 .box {
     flex-grow: 1;
     /*background: rgb(169, 192, 255);*/
-    /*margin: 1px;*/
+    margin: 1px;
     position: relative;
-    /*//  transition: transform 0.2s ease, background-color 0.2s ease-in-out;*/
+    transition: transform 0.2s ease, background-color 0.2s ease-in-out;
 }
 
 .box:hover {
-    /*transform: scale(1.2, 1.2);*/
-    outline: 1px solid #222222;
-    /*box-shadow: 0px 0px 10px 2px rgba(130,130,130,0.2);*/
+    transform: scale(1.2, 1.2);
+    /*outline: 1px solid #222222;*/
+    box-shadow: 0px 0px 10px 2px rgba(130,130,130,0.2);
+    z-index: 100;
 }
 
 .box.frontier:after {

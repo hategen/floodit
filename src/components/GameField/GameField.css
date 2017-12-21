@@ -2,4 +2,7 @@
     display: grid;
     padding: 1%;
     width: 100vh;
+    margin: 10px;
+    background: #f1f1f1;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }

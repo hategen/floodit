@@ -1,10 +1,11 @@
-/*
 import {connect} from 'react-redux';
 
-import {ACTION} from "../actions/actions";
+import App from '../components/App/App';
 
-import App from '../components/App';
+const mapStateToProps = (state) => ({
+    backgroundColor: state.backgroundColor
+});
 
-const ConnectedApp = connect(mapStateToprops, mapDispatchToProps)(App);
+const ConnectedApp = connect(mapStateToProps,)(App);
 
-export default ConnectedApp;*/
+export default ConnectedApp;
