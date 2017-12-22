@@ -3,7 +3,7 @@ import React from 'react';
 const AppHeader = () => {
     return (
         <header>
-            Footer placeholder
+            {/*Footer placeholder*/}
         </header>
     )
 };

@@ -14,28 +14,29 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
 
     return (
         <section className="game-settings">
-            <NumericInput
-                type="number"
-                name="fieldSize"
-                min={6}
-                max={75}
-                value={fieldSize}
-                onChange={onFieldSizeChangeHandler}
-                placeholder="Field size"
-                label="Field size"
-            />
+            <div className="flex-container">
+                <NumericInput
+                    type="number"
+                    name="fieldSize"
+                    min={6}
+                    max={75}
+                    value={fieldSize}
+                    onChange={onFieldSizeChangeHandler}
+                    placeholder="Field size"
+                    label="Field size"
+                />
 
-            <NumericInput
-                type="number"
-                name="colorNumber"
-                min={6}
-                max={30}
-                value={colorNumber}
-                onChange={onColorNumberChangeHandler}
-                placeholder="Color number"
-                label="Color number"
-            />
-
+                <NumericInput
+                    type="number"
+                    name="colorNumber"
+                    min={6}
+                    max={30}
+                    value={colorNumber}
+                    onChange={onColorNumberChangeHandler}
+                    placeholder="Color number"
+                    label="Color number"
+                />
+            </div>
             <button onClick={() => {
                 newGame()
             }}> NewGame

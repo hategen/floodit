@@ -3,7 +3,7 @@ import React from 'react';
 const AppFooter = () => {
     return (
         <footer>
-            Footer placeholder
+            {/*Footer placeholder*/}
         </footer>
     )
 };
