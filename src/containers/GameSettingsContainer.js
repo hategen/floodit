@@ -16,7 +16,6 @@ const mapDispatchToprops = dispatch => ({
     autoTurn: () => {
         dispatch(autoTurn())
     }
-
 });
 
 const GameSettingsContainer = connect(mapStateToProps, mapDispatchToprops)(GameSettings);

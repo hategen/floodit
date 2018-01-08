@@ -4,8 +4,9 @@ import './NumericInput.css';
 
 const NumericInput = (props) => {
     return (
-        <label>
-            {props.label}
+        <label for={props.name}>
+            <span> {props.label}</span>
+
             <input
                 type="number"
                 {...props}

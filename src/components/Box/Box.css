@@ -1,9 +1,9 @@
 .box {
     flex-grow: 1;
     /*background: rgb(169, 192, 255);*/
-    margin: 1px;
+    /*margin: 1px;*/
     position: relative;
-    transition: transform 0.2s ease, background-color 0.2s ease-in-out;
+    /*transition: transform 0.2s ease, background-color 0.2s ease-in-out;*/
 }
 
 .box:hover {
@@ -13,7 +13,7 @@
     z-index: 100;
 }
 
-.box.frontier:after {
+/*.box.frontier:after {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -24,7 +24,7 @@
     margin-top: -2.5px;
     height: 3px;
     content: '';
-}
+}*/
 
 
 .box.visited {

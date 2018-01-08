@@ -3,7 +3,7 @@ import React from 'react';
 import './GameSettings.css';
 import NumericInput from '../NumericInput/NumericInput';
 
-const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNumberChange, autoTurn}) => {
+const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNumberChange, autoTurn, won}) => {
     const onFieldSizeChangeHandler = (event) => {
         fieldSizeChange(Number.parseInt(event.target.value, 10))
     };
@@ -14,6 +14,8 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
 
     return (
         <section className="game-settings">
+
+
             <div className="flex-container">
                 <NumericInput
                     type="number"
@@ -37,16 +39,16 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
                     label="Color number"
                 />
             </div>
+
             <button onClick={() => {
                 newGame()
             }}> NewGame
             </button>
 
-            <button onClick={() => {
-                setInterval(() => {
-                    autoTurn()
-                }, 200);
-            }}> AUTO
+            <button
+                onClick={autoTurn}
+                disabled={won}
+            > AUTO
             </button>
         </section>
     )

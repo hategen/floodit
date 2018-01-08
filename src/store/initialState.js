@@ -7,7 +7,8 @@ const initialState = {
     colors: [],
     currentColor: null,
     frontier: [{x: 0, y: 0}],
-    visited: {}
+    visited: {},
+    won: false
 };
 
 export default initialState;

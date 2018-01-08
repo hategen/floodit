@@ -15,7 +15,9 @@ class App extends Component {
                 className="App"
                 style={{backgroundColor: this.props.backgroundColor}}
             >
-                <AppHeader/>
+                <AppHeader
+                    won={this.props.won}
+                />
                 <GameSettingsContainer/>
                 <FieldContainer/>
                 <AppFooter/>

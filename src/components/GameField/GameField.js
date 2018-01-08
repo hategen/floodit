@@ -4,7 +4,6 @@ import Row from '../Row/Row';
 import './GameField.css';
 
 const GameField = ({field, changeColor, frontier}) => {
-
     return (
         <section className="game-field">
             {

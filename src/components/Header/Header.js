@@ -1,9 +1,20 @@
 import React from 'react';
 
-const AppHeader = () => {
+
+const renderYouWon = (won) => {
+    if (won) {
+        return (
+            <h1>YOU WON!!!</h1>
+        )
+    }
+    return null;
+};
+
+
+const AppHeader = ({won}) => {
     return (
         <header>
-            {/*Footer placeholder*/}
+            {renderYouWon(won)}
         </header>
     )
 };

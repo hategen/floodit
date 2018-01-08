@@ -182,6 +182,18 @@ export const getNextTurnColor = (frontier, field) => {
     return maxcolorName;
 };
 
+const checkWinCondition = (field, color) => {
+    for (let i = 0; i < field.length; i++) {
+        for (let j = 0; j < field.length; j++) {
+            if (field[j][i].color !== color) {
+                return false
+            }
+
+        }
+    }
+
+    return true;
+};
 
 export const floodField = (field, color, startFrontier, visited) => {
         console.time('FLOOD');
@@ -218,10 +230,13 @@ export const floodField = (field, color, startFrontier, visited) => {
 
         const newField = repaintField(field, visited, color);
 
+        const won = checkWinCondition(newField, color);
+
         const ret = {
             field: newField,
             frontier: mapFrontierToArray(clearFrontier(nextFrontier, newField, color)),
-            visited
+            visited,
+            won,
         };
 
         return ret;

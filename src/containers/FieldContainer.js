@@ -3,7 +3,10 @@ import {connect} from 'react-redux';
 import GameField from '../components/GameField/GameField';
 import {changeColor} from "../actions/actions";
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = () => (state) => {
+    const {field, frontier} = state;
+    return {field, frontier};
+};
 
 const mapDispatchToprops = dispatch => ({
     changeColor: (color) => {

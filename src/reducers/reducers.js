@@ -21,7 +21,8 @@ export default function reducers(state = {}, action) {
                 currentColor: currentColor,
                 frontier: [{x: 0, y: 0}],
                 visited: {},
-                backgroundColor: currentColor
+                backgroundColor: currentColor,
+                won: false
             };
 
         case ACTION_FIELDSIZE_CHANGE:
@@ -49,7 +50,9 @@ export default function reducers(state = {}, action) {
             const nextColor = getNextTurnColor(state.frontier, state.field);
             return {
                 ...state,
-                ...floodField(state.field, nextColor, state.frontier, state.visited)
+                ...floodField(state.field, nextColor, state.frontier, state.visited),
+                backgroundColor: state.currentColor,
+                currentColor: nextColor,
             };
 
         default:
