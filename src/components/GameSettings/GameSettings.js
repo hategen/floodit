@@ -15,7 +15,6 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
     return (
         <section className="game-settings">
 
-
             <div className="flex-container">
                 <NumericInput
                     type="number"
@@ -40,15 +39,17 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
                 />
             </div>
 
-            <button onClick={() => {
-                newGame()
-            }}> NewGame
+            <button
+                className="settings-button"
+                onClick={() => {
+                    newGame()
+                }}> New game
             </button>
 
-            <button
-                onClick={autoTurn}
-                disabled={won}
-            > AUTO
+            <button className="settings-button"
+                    onClick={autoTurn}
+                    disabled={won}
+            > Auto turn
             </button>
         </section>
     )
