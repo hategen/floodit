@@ -30,8 +30,8 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
                 <NumericInput
                     type="number"
                     name="colorNumber"
-                    min={6}
-                    max={30}
+                    min={3}
+                    max={12}
                     value={colorNumber}
                     onChange={onColorNumberChangeHandler}
                     placeholder="Color number"

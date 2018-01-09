@@ -1,5 +1,6 @@
 import randomColor from 'randomcolor';
 import {getRandomFromArray} from './utils';
+import cloneDeep from 'lodash/cloneDeep';
 
 export const getRandomColors = (count = 6) => {
     const colors = [];
@@ -85,7 +86,7 @@ const filterVisited = (visited = {}, points = []) => {
 
 const repaintField = (field, points, color) => {
     console.time('REPAINT');
-    const newField = JSON.parse(JSON.stringify(field));
+    const newField = cloneDeep(field);
 
     for (const point in points) {
         if (points.hasOwnProperty(point)) {
