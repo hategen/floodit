@@ -6,7 +6,6 @@
     grid-template-areas: "field  header" "field  settings" "field  footer";
     grid-template-columns: 9fr minmax(300px, 2fr);
     grid-template-rows: 1fr 3fr 1fr;
-    /*transition: background-color 0.5s ease;*/
 }
 
 .game-field {

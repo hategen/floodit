@@ -7,6 +7,6 @@ const mapStateToProps = (state) => ({
     won: state.won
 });
 
-const ConnectedApp = connect(mapStateToProps,)(App);
+const ConnectedApp = connect(mapStateToProps)(App);
 
 export default ConnectedApp;

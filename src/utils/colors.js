@@ -1,18 +1,15 @@
 import randomColor from 'randomcolor';
 import {getRandomFromArray} from './utils';
 import cloneDeep from 'lodash/cloneDeep';
+import random from 'lodash/random';
 
 export const getRandomColors = (count = 6) => {
-    const colors = [];
-
-    for (let i = 0; i < count; i++) {
-        colors.push(randomColor({
-            luminosity: 'ligth',
-            hue: 'random',
-            format: 'rgb'
-        }));
+    const colors = new Set();
+    while (colors.size !== count) {
+        colors.add(`${random(1, 12)}`);
     }
-    return colors;
+
+    return [...colors];
 };
 
 export const getRandomField = (colors, dimensions) => {
@@ -197,49 +194,48 @@ const checkWinCondition = (field, color) => {
 };
 
 export const floodField = (field, color, startFrontier, visited) => {
-        console.time('FLOOD');
-        let floodColor = field[0][0].color;
-        //  const visited = {};
-        if (color === floodColor) {
-            return {field, frontier: startFrontier, visited};
-        }
-        const nextFrontier = {};
-        const fieldSize = field.length - 1;
-        while (startFrontier.length !== 0) {
-            const current = startFrontier.pop();
-            const neighbours = getNeighbours(field, current.x, current.y, floodColor);
-            const notVisited = filterVisited(visited, neighbours);
-
-            if ((neighbours.length < 2 && getMaxNeighbours(current, fieldSize) === 2) ||
-                (neighbours.length < 3 && getMaxNeighbours(current, fieldSize) === 3) ||
-                (neighbours.length < 4 && getMaxNeighbours(current, fieldSize) === 4)) {
-                nextFrontier[`${current.x}_${current.y}`] = true;
-            }
-
-            visited[`${current.x}_${current.y}`] = true;
-            field[current.y][current.x].visited = true;
-
-            startFrontier.push(...notVisited);
-
-            if (startFrontier.length === 0 && mapFrontierToArray(nextFrontier).length && floodColor !== color) {
-                floodColor = color;
-                startFrontier.push(...mapFrontierToArray(nextFrontier));
-            }
-        }
-
-        console.timeEnd('FLOOD');
-
-        const newField = repaintField(field, visited, color);
-
-        const won = checkWinCondition(newField, color);
-
-        const ret = {
-            field: newField,
-            frontier: mapFrontierToArray(clearFrontier(nextFrontier, newField, color)),
-            visited,
-            won,
-        };
-
-        return ret;
+    console.time('FLOOD');
+    let floodColor = field[0][0].color;
+    //  const visited = {};
+    if (color === floodColor) {
+        return {field, frontier: startFrontier, visited};
     }
-;
+    const nextFrontier = {};
+    const fieldSize = field.length - 1;
+    while (startFrontier.length !== 0) {
+        const current = startFrontier.pop();
+        const neighbours = getNeighbours(field, current.x, current.y, floodColor);
+        const notVisited = filterVisited(visited, neighbours);
+
+        if ((neighbours.length < 2 && getMaxNeighbours(current, fieldSize) === 2) ||
+            (neighbours.length < 3 && getMaxNeighbours(current, fieldSize) === 3) ||
+            (neighbours.length < 4 && getMaxNeighbours(current, fieldSize) === 4)) {
+            nextFrontier[`${current.x}_${current.y}`] = true;
+        }
+
+        visited[`${current.x}_${current.y}`] = true;
+        field[current.y][current.x].visited = true;
+
+        startFrontier.push(...notVisited);
+
+        if (startFrontier.length === 0 && mapFrontierToArray(nextFrontier).length && floodColor !== color) {
+            floodColor = color;
+            startFrontier.push(...mapFrontierToArray(nextFrontier));
+        }
+    }
+
+    console.timeEnd('FLOOD');
+
+    const newField = repaintField(field, visited, color);
+
+    const won = checkWinCondition(newField, color);
+
+    const ret = {
+        field: newField,
+        frontier: mapFrontierToArray(clearFrontier(nextFrontier, newField, color)),
+        visited,
+        won,
+    };
+
+    return ret;
+};

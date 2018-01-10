@@ -1,27 +1,19 @@
 import React from 'react'
 import './Box.css';
 
-const Box = ({x, y, color, visited, onClick, frontier}) => {
+class Box extends React.Component {
+    render() {
+        const {x, y, color, onClick} = this.props;
+        const classes = ['box', `color-${color}`].join(' ');
 
-    const isFrontier = !!frontier.find(el => (el.x === x && el.y === y));
-    const classes = ['box'];
-
-    if (isFrontier) {
-        classes.push("frontier");
-    }
-    if (visited) {
-        classes.push("visited");
-    }
-    return (
-        <div
-            className={classes.join(' ')}
-            style={{backgroundColor: color}}
-            onClick={() => onClick(color)}
-        >
-
-        </div>
-    )
+        return (
+            <div
+                className={classes}
+                onClick={() => onClick(color)}
+            >
+            </div>
+        )
+    };
 };
-
 
 export default Box;

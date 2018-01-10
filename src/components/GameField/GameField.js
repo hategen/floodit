@@ -3,7 +3,7 @@ import React from 'react';
 import Row from '../Row/Row';
 import './GameField.css';
 
-class GameField extends React.PureComponent {
+class GameField extends React.Component {
 
     render() {
         const {field, changeColor, frontier} = this.props;
@@ -13,7 +13,7 @@ class GameField extends React.PureComponent {
                     field.map((row, idx) => {
                         return (
                             <Row
-                                key={idx}
+                                key={`row_${idx}`}
                                 boxes={row}
                                 y={idx}
                                 boxClickHandler={changeColor}

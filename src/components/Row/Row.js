@@ -7,18 +7,15 @@ const Row = ({boxes, boxClickHandler, y, frontier}) => {
         <div className="row">
             {boxes.map((box, idx) => {
                 return (
-
                     <Box
-                        key={idx}
+                        key={`${idx}_${y}`}
                         color={box.color}
                         visited={box.visited}
                         onClick={boxClickHandler}
                         x={idx}
                         y={y}
                         frontier={frontier}
-                    >
-                        box
-                    </Box>
+                    />
                 )
             })}
         </div>);

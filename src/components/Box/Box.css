@@ -9,24 +9,54 @@
 .box:hover {
     transform: scale(1.2, 1.2);
     /*outline: 1px solid #222222;*/
-    box-shadow: 0px 0px 10px 2px rgba(130,130,130,0.2);
+    /*box-shadow: 0px 0px 10px 2px rgba(130, 130, 130, 0.2);*/
     z-index: 100;
 }
 
-/*.box.frontier:after {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background: red;
-    display: block;
-    width: 3px;
-    margin-left: -2.5px;
-    margin-top: -2.5px;
-    height: 3px;
-    content: '';
-}*/
+.color-1 {
+    background: rgb(34, 6, 104);
+}
 
+.color-2 {
+    background: rgb(237, 235, 135);
+}
 
-.box.visited {
+.color-3 {
+    background: rgb(255, 44, 69);
+}
 
+.color-4 {
+    background: rgb(7, 50, 221);
+}
+
+.color-5 {
+    background: rgb(218, 55, 229);
+}
+
+.color-6 {
+    background: rgb(211, 242, 219);
+}
+
+.color-7 {
+    background: rgb(65, 193, 0);
+}
+
+.color-8 {
+    background: rgb(161, 223, 226);
+}
+
+.color-9 {
+    background: rgb(255, 95, 146);
+}
+
+.color-10 {
+    background: rgb(221, 237, 0);
+}
+
+.color-11 {
+    background: rgb(15, 255, 163);
+}
+
+.color-12 {
+    background: rgb(58, 220, 255);
 }
