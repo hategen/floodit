@@ -10,7 +10,7 @@ import GameSettingsContainer from '../../containers/GameSettingsContainer';
 class App extends PureComponent {
     render() {
         const {backgroundColor, won} = this.props;
-        const classNames = ["App"];//, `color-${backgroundColor}`].join(' ');
+        const classNames = ["App", `color-${backgroundColor}`].join(' ');
         return (
             <div className={classNames}>
                 <AppHeader
