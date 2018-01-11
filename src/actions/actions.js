@@ -24,7 +24,6 @@ export const changeColor = (color) => ({
     color
 });
 
-
 export const autoTurn = () => ({
     type: ACTION_AUTOTURN
 });

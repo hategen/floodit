@@ -1,7 +1,7 @@
 import randomColor from 'randomcolor';
 import {getRandomFromArray} from './utils';
-import cloneDeep from 'lodash/cloneDeep';
 import random from 'lodash/random';
+import FastClone from 'fastest-clone';
 
 export const getRandomColors = (count = 6) => {
     const colors = new Set();
@@ -82,8 +82,7 @@ const filterVisited = (visited = {}, points = []) => {
 };
 
 const repaintField = (field, points, color) => {
-    console.time('REPAINT');
-    const newField = cloneDeep(field);
+    const newField = field.map(el => FastClone.cloneArray(el));
 
     for (const point in points) {
         if (points.hasOwnProperty(point)) {
@@ -91,12 +90,11 @@ const repaintField = (field, points, color) => {
             newField[y][x].color = color;
         }
     }
-    console.timeEnd('REPAINT');
+
     return newField;
 };
 
 const mapFrontierToArray = (frontier) => {
-    console.time('MAP');
     const newFrontier = [];
     for (const point in frontier) {
         if (frontier.hasOwnProperty(point)) {
@@ -104,7 +102,6 @@ const mapFrontierToArray = (frontier) => {
             newFrontier.push({x: Number.parseInt(x, 10), y: Number.parseInt(y, 10)})
         }
     }
-    console.timeEnd('MAP');
     return newFrontier.length ? newFrontier : [{x: 0, y: 0}];
 };
 
@@ -135,7 +132,6 @@ const getMaxNeighbours = (point, fieldSize) => {
         return 4
     }
 };
-
 
 const clearFrontier = (frontier, field, color) => {
     Object.keys(frontier).forEach(point => {
@@ -170,7 +166,6 @@ export const getNextTurnColor = (frontier, field) => {
     let maxColorNum = hash[maxcolorName];
 
     for (const col in hash) {
-
         if (hash[col] > maxColorNum) {
             maxColorNum = hash[col];
             maxcolorName = col;
@@ -186,7 +181,6 @@ const checkWinCondition = (field, color) => {
             if (field[j][i].color !== color) {
                 return false
             }
-
         }
     }
 
@@ -194,7 +188,6 @@ const checkWinCondition = (field, color) => {
 };
 
 export const floodField = (field, color, startFrontier, visited) => {
-    console.time('FLOOD');
     let floodColor = field[0][0].color;
     //  const visited = {};
     if (color === floodColor) {
@@ -224,7 +217,6 @@ export const floodField = (field, color, startFrontier, visited) => {
         }
     }
 
-    console.timeEnd('FLOOD');
 
     const newField = repaintField(field, visited, color);
 
