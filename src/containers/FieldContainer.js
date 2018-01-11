@@ -4,8 +4,8 @@ import GameField from '../components/GameField/GameField';
 import {changeColor} from "../actions/actions";
 
 const mapStateToProps = () => (state) => {
-    const {field, frontier} = state;
-    return {field, frontier};
+    const {field, visited} = state;
+    return {field, visited};
 };
 
 const mapDispatchToprops = dispatch => ({

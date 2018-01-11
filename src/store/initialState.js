@@ -1,7 +1,7 @@
 const initialState = {
     fieldSize: 10,
     colorNumber: 6,
-    field: [],
+    field: null,
     isStarted: false,
     movesMade: 0,
     colors: [],

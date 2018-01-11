@@ -4,12 +4,16 @@ import random from 'lodash/random';
 import FastClone from 'fastest-clone';
 
 export const getRandomColors = (count = 6) => {
-    const colors = new Set();
-    while (colors.size !== count) {
-        colors.add(`${random(1, 12)}`);
-    }
+    const colors = [];
 
-    return [...colors];
+    for (let i = 0; i < count; i++) {
+        colors.push(randomColor({
+            luminosity: 'ligth',
+            hue: 'random',
+            format: 'rgb'
+        }));
+    }
+    return colors;
 };
 
 export const getRandomField = (colors, dimensions) => {
