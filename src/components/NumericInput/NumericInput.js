@@ -3,10 +3,6 @@ import React from 'react';
 import './NumericInput.css';
 
 class NumericInput extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     _change() {
         const event = new Event('change', {

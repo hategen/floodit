@@ -9,7 +9,7 @@ import GameSettingsContainer from '../../containers/GameSettingsContainer';
 
 class App extends PureComponent {
     render() {
-        const {backgroundColor, won} = this.props;
+        const {won} = this.props;
         const classNames = ["App"];
         return (
             <div className={classNames}>

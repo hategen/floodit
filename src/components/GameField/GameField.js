@@ -1,43 +1,27 @@
 import React from 'react';
-
-import Row from '../Row/Row';
 import './GameField.css';
 
 class GameField extends React.Component {
 
-    /*  render() {
-          const {field, changeColor, frontier} = this.props;
-          return (
-              <section className="game-field">
-                  {
-                      field.map((row, idx) => {
-                          return (
-                              <Row
-                                  key={`row_${idx}`}
-                                  boxes={row}
-                                  y={idx}
-                                  boxClickHandler={changeColor}
-                                  frontier={frontier}
-                              />
-                          )
-                      })
-                  }
-              </section>
-          )
-      }*/
+    constructor(props) {
+        super(props);
+        this.canvasHeight = 0;
+        this.canvasWidth = 0;
+        this.cellWidth = 0;
+        this.cellHeigth = 0;
+    }
 
     renderField(canvas, field) {
         const ctx = canvas.getContext("2d");
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const canvasHeight = canvas.height;
-        const canvasWidth = canvas.width;
-        const cellWidth = canvasWidth / field[0].length;
-        const cellHeigth = canvasHeight / field.length;
+        ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+        const cellWidth = Math.ceil(this.canvasWidth / field[0].length);
+        const cellHeigth = Math.ceil(this.canvasHeight / field.length);
 
         for (let i = 0; i < field.length; i++) {
             for (let j = 0; j < field.length; j++) {
                 ctx.fillStyle = field[j][i].color;
-                ctx.fillRect(j * cellWidth, i * cellHeigth, cellWidth, cellHeigth);
+                ctx.fillRect(Math.ceil(j * cellWidth), Math.ceil(i * cellHeigth), cellWidth, cellHeigth);
             }
         }
         ctx.stroke();
@@ -46,15 +30,13 @@ class GameField extends React.Component {
     renderVisited(canvas, visited, field) {
         const ctx = canvas.getContext("2d");
         ctx.fillStyle = field[0][0].color;
-        const canvasHeight = canvas.height;
-        const canvasWidth = canvas.width;
-        const cellWidth = canvasWidth / field[0].length;
-        const cellHeigth = canvasHeight / field.length;
+        const cellWidth = Math.ceil(this.canvasWidth / field[0].length);
+        const cellHeigth = Math.ceil(this.canvasHeight / field.length);
 
         for (const point in visited) {
             if (visited.hasOwnProperty(point)) {
-                const [y, x] = point.split('_');
-                ctx.fillRect(x * cellWidth, y * cellHeigth, cellWidth, cellHeigth);
+                const {y, x} = visited[point];
+                ctx.fillRect(Math.ceil(x * cellWidth), Math.ceil(y * cellHeigth), cellWidth, cellHeigth);
             }
         }
 
@@ -62,7 +44,6 @@ class GameField extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {changeColor} = this.props;
         const canvas = this._canvasRef;
         if (nextProps.field && Object.keys(nextProps.visited).length === 0) {
             this.renderField(canvas, nextProps.field);
@@ -74,7 +55,23 @@ class GameField extends React.Component {
     componentDidMount() {
         this._canvasRef.width = Number.parseInt(window.getComputedStyle(this._sectionRef, null).getPropertyValue('width'), 10);
         this._canvasRef.height = Number.parseInt(window.getComputedStyle(this._sectionRef, null).getPropertyValue('height'), 10);
+        this.canvasHeight = this._canvasRef.height;
+        this.canvasWidth = this._canvasRef.width;
     }
+
+    clickHandler = (e) => {
+        const rect = this._canvasRef.getBoundingClientRect();
+        const ctx = this._canvasRef.getContext("2d");
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const pixel = ctx.getImageData(x, y, 1, 1).data;
+
+        const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+
+        this.props.changeColor(color);
+    };
 
     render() {
         return (
@@ -85,6 +82,7 @@ class GameField extends React.Component {
                 <canvas
                     id="canvas"
                     ref={canvasRef => this._canvasRef = canvasRef}
+                    onClick={this.clickHandler}
                 />
             </section>
         )

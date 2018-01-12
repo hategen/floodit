@@ -1,6 +1,5 @@
 import randomColor from 'randomcolor';
 import {getRandomFromArray} from './utils';
-import random from 'lodash/random';
 import FastClone from 'fastest-clone';
 
 export const getRandomColors = (count = 6) => {
@@ -90,7 +89,7 @@ const repaintField = (field, points, color) => {
 
     for (const point in points) {
         if (points.hasOwnProperty(point)) {
-            const [x, y] = point.split('_');
+            const {x, y} = points[point];
             newField[y][x].color = color;
         }
     }
@@ -102,7 +101,7 @@ const mapFrontierToArray = (frontier) => {
     const newFrontier = [];
     for (const point in frontier) {
         if (frontier.hasOwnProperty(point)) {
-            const [x, y] = point.split('_');
+            const {x, y} = frontier[point];
             newFrontier.push({x: Number.parseInt(x, 10), y: Number.parseInt(y, 10)})
         }
     }
@@ -139,11 +138,11 @@ const getMaxNeighbours = (point, fieldSize) => {
 
 const clearFrontier = (frontier, field, color) => {
     Object.keys(frontier).forEach(point => {
-        const [x, y] = point.split('_');
+        const {x, y} = point;
         const neighbours = getNeighbours(field, Number.parseInt(x, 10), Number.parseInt(y, 10), color);
 
         if (neighbours.length === getMaxNeighbours({x, y}, field.length)) {
-            delete frontier[point];
+            delete frontier[`${x}_${y}`];
         }
     });
     return frontier;
@@ -207,15 +206,16 @@ export const floodField = (field, color, startFrontier, visited) => {
         if ((neighbours.length < 2 && getMaxNeighbours(current, fieldSize) === 2) ||
             (neighbours.length < 3 && getMaxNeighbours(current, fieldSize) === 3) ||
             (neighbours.length < 4 && getMaxNeighbours(current, fieldSize) === 4)) {
-            nextFrontier[`${current.x}_${current.y}`] = true;
+            nextFrontier[`${current.x}_${current.y}`] = {x: current.x, y: current.y};
         }
 
-        visited[`${current.x}_${current.y}`] = true;
-        field[current.y][current.x].visited = true;
+        visited[`${current.x}_${current.y}`] = {x: current.x, y: current.y};
+        // field[current.y][current.x].visited = true;
 
         startFrontier.push(...notVisited);
 
-        if (startFrontier.length === 0 && mapFrontierToArray(nextFrontier).length && floodColor !== color) {
+
+        if (startFrontier.length === 0 && Object.keys(nextFrontier).length && floodColor !== color) {
             floodColor = color;
             startFrontier.push(...mapFrontierToArray(nextFrontier));
         }

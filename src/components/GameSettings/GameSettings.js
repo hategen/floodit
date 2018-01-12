@@ -23,7 +23,7 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
                     max={75}
                     value={fieldSize}
                     onChange={onFieldSizeChangeHandler}
-                    placeholder="Field size"
+                    placeholder=""
                     label="Field size"
                 />
 
@@ -34,7 +34,7 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
                     max={12}
                     value={colorNumber}
                     onChange={onColorNumberChangeHandler}
-                    placeholder="Color number"
+                    placeholder=""
                     label="Color number"
                 />
             </div>
