@@ -210,10 +210,8 @@ export const floodField = (field, color, startFrontier, visited) => {
         }
 
         visited[`${current.x}_${current.y}`] = {x: current.x, y: current.y};
-        // field[current.y][current.x].visited = true;
 
         startFrontier.push(...notVisited);
-
 
         if (startFrontier.length === 0 && Object.keys(nextFrontier).length && floodColor !== color) {
             floodColor = color;

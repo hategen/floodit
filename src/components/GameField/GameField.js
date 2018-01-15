@@ -35,8 +35,8 @@ class GameField extends React.Component {
 
         for (const point in visited) {
             if (visited.hasOwnProperty(point)) {
-                const {y, x} = visited[point];
-                ctx.fillRect(Math.ceil(x * cellWidth), Math.ceil(y * cellHeigth), cellWidth, cellHeigth);
+                const {x, y} = visited[point];
+                ctx.fillRect(Math.ceil(y * cellWidth), Math.ceil(x * cellHeigth), cellWidth, cellHeigth);
             }
         }
 
