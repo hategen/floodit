@@ -1,0 +1,6 @@
+.color-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(60px, auto));
+    grid-gap: 15px;
+    width: 100%;
+}

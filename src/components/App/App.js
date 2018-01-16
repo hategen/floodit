@@ -6,6 +6,7 @@ import AppFooter from '../Footer/Footer';
 
 import FieldContainer from '../../containers/FieldContainer';
 import GameSettingsContainer from '../../containers/GameSettingsContainer';
+import ColorControlsContainer from '../../containers/ColorControlsContainer';
 
 class App extends PureComponent {
     render() {
@@ -18,6 +19,7 @@ class App extends PureComponent {
                 />
                 <GameSettingsContainer/>
                 <FieldContainer/>
+                <ColorControlsContainer/>
                 <AppFooter/>
             </div>
         );

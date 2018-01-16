@@ -8,7 +8,8 @@ const initialState = {
     currentColor: null,
     frontier: [{x: 0, y: 0}],
     visited: {},
-    won: false
+    won: false,
+    remainingColors: []
 };
 
 export default initialState;

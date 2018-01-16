@@ -178,21 +178,19 @@ export const getNextTurnColor = (frontier, field) => {
     return maxcolorName;
 };
 
-const checkWinCondition = (field, color) => {
+export const getRemainingColors = (field) => {
+    const remainingColors = new Set();
     for (let i = 0; i < field.length; i++) {
         for (let j = 0; j < field.length; j++) {
-            if (field[j][i].color !== color) {
-                return false
-            }
+            remainingColors.add(field[j][i].color);
         }
     }
 
-    return true;
+    return [...remainingColors].sort();
 };
 
 export const floodField = (field, color, startFrontier, visited) => {
     let floodColor = field[0][0].color;
-    //  const visited = {};
     if (color === floodColor) {
         return {field, frontier: startFrontier, visited};
     }
@@ -219,16 +217,16 @@ export const floodField = (field, color, startFrontier, visited) => {
         }
     }
 
-
     const newField = repaintField(field, visited, color);
 
-    const won = checkWinCondition(newField, color);
+    const remainingColors = getRemainingColors(newField);
 
     const ret = {
         field: newField,
         frontier: mapFrontierToArray(clearFrontier(nextFrontier, newField, color)),
         visited,
-        won,
+        won: remainingColors.length === 1,
+        remainingColors
     };
 
     return ret;
