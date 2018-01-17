@@ -24,7 +24,8 @@ export default function reducers(state = {}, action) {
                 visited: {},
                 backgroundColor: currentColor,
                 won: false,
-                remainingColors
+                remainingColors,
+                started: true
             };
 
         case ACTION_FIELDSIZE_CHANGE:

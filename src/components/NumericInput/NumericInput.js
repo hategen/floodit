@@ -10,8 +10,16 @@ class NumericInput extends React.Component {
             'cancelable': true
         });
 
+        if (this._inputRef.value > this.props.max) {
+            this._inputRef.value = this.props.max;
+        }
+        if (this._inputRef.value < this.props.min) {
+            this._inputRef.value = this.props.min;
+        }
         this._inputRef.dispatchEvent(event);
-        this.props.onChange(event);
+
+
+        this.props.changehandler(event);
     }
 
     increment = () => {
@@ -21,6 +29,7 @@ class NumericInput extends React.Component {
 
     decrement = () => {
         this._inputRef.stepDown();
+
         this._change();
     };
 
@@ -37,6 +46,7 @@ class NumericInput extends React.Component {
                     <input
                         ref={inputRef => this._inputRef = inputRef}
                         className="quantity"
+                        onChange={()=>this._change()}
                         type="number"
                         {...this.props}
                     />

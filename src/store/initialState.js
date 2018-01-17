@@ -9,7 +9,8 @@ const initialState = {
     frontier: [{x: 0, y: 0}],
     visited: {},
     won: false,
-    remainingColors: []
+    remainingColors: [],
+    started: false
 };
 
 export default initialState;

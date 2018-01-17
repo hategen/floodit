@@ -3,7 +3,7 @@ import React from 'react';
 import './GameSettings.css';
 import NumericInput from '../NumericInput/NumericInput';
 
-const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNumberChange, autoTurn, won}) => {
+const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNumberChange, autoTurn, won, started}) => {
     const onFieldSizeChangeHandler = (event) => {
         fieldSizeChange(Number.parseInt(event.target.value, 10))
     };
@@ -22,7 +22,7 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
                     min={6}
                     max={75}
                     value={fieldSize}
-                    onChange={onFieldSizeChangeHandler}
+                    changehandler={onFieldSizeChangeHandler}
                     placeholder=""
                     label="Field size"
                 />
@@ -33,7 +33,7 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
                     min={3}
                     max={12}
                     value={colorNumber}
-                    onChange={onColorNumberChangeHandler}
+                    changehandler={onColorNumberChangeHandler}
                     placeholder=""
                     label="Color number"
                 />
@@ -48,7 +48,7 @@ const GameSettings = ({fieldSize, colorNumber, newGame, fieldSizeChange, colorNu
 
             <button className="settings-button"
                     onClick={autoTurn}
-                    disabled={won}
+                    disabled={won || !started}
             > Auto turn
             </button>
         </section>
