@@ -3,16 +3,15 @@ import {getRandomFromArray} from './utils';
 import FastClone from 'fastest-clone';
 
 export const getRandomColors = (count = 6) => {
-    const colors = [];
+    const colors = new Set();
 
-    for (let i = 0; i < count; i++) {
-        colors.push(randomColor({
-            luminosity: 'ligth',
+    while (colors.size < count) {
+        colors.add(randomColor({
             hue: 'random',
             format: 'rgb'
         }));
     }
-    return colors;
+    return [...colors];
 };
 
 export const getRandomField = (colors, dimensions) => {

@@ -7,7 +7,7 @@
             "field colorControls header"
             "field colorControls settings"
             "field colorControls footer";
-    grid-template-columns: 5fr 1fr minmax(300px, 2fr);
+    grid-template-columns: 6fr 1fr minmax(300px, 2fr);
     grid-template-rows: 1fr 3fr 1fr;
 }
 
