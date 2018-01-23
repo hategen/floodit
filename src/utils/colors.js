@@ -1,6 +1,6 @@
 import randomColor from 'randomcolor';
 import {getRandomFromArray} from './utils';
-import FastClone from 'fastest-clone';
+// import FastClone from 'fastest-clone';
 
 export const getRandomColors = (count = 6) => {
     const colors = new Set();
@@ -84,16 +84,14 @@ const filterVisited = (visited = {}, points = []) => {
 };
 
 const repaintField = (field, points, color) => {
-    const newField = field.map(el => FastClone.cloneArray(el));
-
+    // const newField = field.map(el => FastClone.cloneArray(el));
     for (const point in points) {
         if (points.hasOwnProperty(point)) {
             const {x, y} = points[point];
-            newField[y][x].color = color;
+            field[y][x].color = color;
         }
     }
-
-    return newField;
+    return field;
 };
 
 const mapFrontierToArray = (frontier) => {
@@ -177,18 +175,21 @@ export const getNextTurnColor = (frontier, field) => {
     return maxcolorName;
 };
 
-export const getRemainingColors = (field) => {
+export const getRemainingColors = (field, maxColorCount) => {
     const remainingColors = new Set();
     for (let i = 0; i < field.length; i++) {
         for (let j = 0; j < field.length; j++) {
             remainingColors.add(field[j][i].color);
+            if (remainingColors.size === maxColorCount) {
+                return [...remainingColors].sort()
+            }
         }
     }
 
     return [...remainingColors].sort();
 };
 
-export const floodField = (field, color, startFrontier, visited) => {
+export const floodField = (field, color, startFrontier, visited, maxColorCount) => {
     let floodColor = field[0][0].color;
     if (color === floodColor) {
         return {field, frontier: startFrontier, visited};
@@ -218,7 +219,7 @@ export const floodField = (field, color, startFrontier, visited) => {
 
     const newField = repaintField(field, visited, color);
 
-    const remainingColors = getRemainingColors(newField);
+    const remainingColors = getRemainingColors(newField, maxColorCount);
 
     const ret = {
         field: newField,

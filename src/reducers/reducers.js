@@ -43,15 +43,14 @@ export default function reducers(state = {}, action) {
                 ...state,
                 backgroundColor: state.currentColor,
                 currentColor: action.color,
-                ...floodField(state.field, action.color, state.frontier, state.visited)
+                ...floodField(state.field, action.color, state.frontier, state.visited, state.colorNumber)
             };
 
         case ACTION_AUTOTURN:
             const nextColor = getNextTurnColor(state.frontier, state.field);
             return {
                 ...state,
-                ...floodField(state.field, nextColor, state.frontier, state.visited),
-                backgroundColor: state.currentColor,
+                ...floodField(state.field, nextColor, state.frontier, state.visited, state.colorNumber),
                 currentColor: nextColor,
             };
 

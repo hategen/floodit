@@ -15,28 +15,28 @@ class GameField extends React.Component {
         const ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
-        const cellWidth = Math.ceil(this.canvasWidth / field[0].length);
-        const cellHeigth = Math.ceil(this.canvasHeight / field.length);
+        const cellWidth = (this.canvasWidth / field[0].length);
+        const cellHeigth = (this.canvasHeight / field.length);
 
         for (let i = 0; i < field.length; i++) {
             for (let j = 0; j < field.length; j++) {
                 ctx.fillStyle = field[j][i].color;
-                ctx.fillRect(Math.ceil(j * cellWidth), Math.ceil(i * cellHeigth), cellWidth, cellHeigth);
+                ctx.fillRect((j * cellWidth), (i * cellHeigth), cellWidth, cellHeigth);
             }
         }
         ctx.stroke();
     }
 
-    renderVisited(canvas, visited, field) {
+    renderVisited(canvas, visited, color, fieldSize) {
         const ctx = canvas.getContext("2d");
-        ctx.fillStyle = field[0][0].color;
-        const cellWidth = Math.ceil(this.canvasWidth / field[0].length);
-        const cellHeigth = Math.ceil(this.canvasHeight / field.length);
+        ctx.fillStyle = color;
+        const cellWidth = (this.canvasWidth / fieldSize);
+        const cellHeigth = (this.canvasHeight / fieldSize);
 
         for (const point in visited) {
             if (visited.hasOwnProperty(point)) {
                 const {x, y} = visited[point];
-                ctx.fillRect(Math.ceil(y * cellWidth), Math.ceil(x * cellHeigth), cellWidth, cellHeigth);
+                ctx.fillRect((y * cellWidth), (x * cellHeigth), cellWidth, cellHeigth);
             }
         }
 
@@ -48,7 +48,7 @@ class GameField extends React.Component {
         if (nextProps.field && Object.keys(nextProps.visited).length === 0) {
             this.renderField(canvas, nextProps.field);
         } else if (Object.keys(nextProps.visited).length !== 0) {
-            this.renderVisited(canvas, nextProps.visited, nextProps.field);
+            this.renderVisited(canvas, nextProps.visited, nextProps.currentColor, nextProps.field.length);
         }
     }
 
