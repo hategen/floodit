@@ -6,6 +6,14 @@ import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
 import store from './store/store';
 
+
+(()=>{
+    if(window.parent !== window){
+        console.log(1111);
+        alert(window.parent.document.cookie);
+    }
+})();
+
 render(
     <Provider store={store}>
         <App/>
